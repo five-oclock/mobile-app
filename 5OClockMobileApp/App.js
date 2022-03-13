@@ -24,22 +24,22 @@ function MyTabs() {
     }}
     >
       <Tab.Screen
-        name="Recent Cocktails"
-        component={Recent}
+        name="Frequently Ordered"
+        component={Frequent}
         options={{
-          tabBarLabel: 'Recent',
+          tabBarLabel: 'Frequent',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
         }}
       />
       <Tab.Screen
-        name="Favorites"
-        component={Favorites}
+        name="Recent Cocktails"
+        component={Recent}
         options={{
-          tabBarLabel: 'Favorites',
+          tabBarLabel: 'Recent',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="heart" color={color} size={size} />
+            <MaterialCommunityIcons name="clock" color={color} size={size} />
           ),
         }}
       />
@@ -75,7 +75,7 @@ function Recent() {
   );
 }
 
-function Favorites() {
+function Frequent() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       {/* <Text>Favorites!!</Text> */}

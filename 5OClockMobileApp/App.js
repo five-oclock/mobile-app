@@ -1,12 +1,8 @@
-// import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-// import Icon from 'react-native-vector-icons/FontAwesome';
-// import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-// import { faCoffee } from 'react-native-vector-icons/FontAwesome'
 
 export default function App() {
   return (
@@ -20,11 +16,7 @@ const Tab = createBottomTabNavigator();
 
 function MyTabs() {
   return (
-    // <Tab.Navigator>
-    //   <Tab.Screen name="Home" component={Recent} />
-    //   <Tab.Screen name="Settings" component={Favorites} />
-    //   <Tab.Screen name="Catalogue" component={Catalogue} />
-    //   <Tab.Screen name="Profile" component={Profile} />
+    
     <Tab.Navigator
     initialRouteName="Recent"
     screenOptions={{

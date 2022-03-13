@@ -45,7 +45,8 @@ export default StyleSheet.create({
     imagePairs: {
         paddingTop: 20,
         flexDirection: "row",
-        justifyContent: "space-around"
+        justifyContent: "space-around",
+        flexWrap: "wrap"
     },
     //For drinkCard
     drinkImage: {

@@ -4,18 +4,13 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import styles from "./Styles/appStyleSheet"
 // create a component
 export class DrinkCard extends Component {
-    _onPressButton() {
-        alert('You tapped the button!')
-        // alert(this.props.title)
-    }
-
     render() {
         return (
-            <TouchableOpacity onPress={this._onPressButton} underlayColor="red">
+
+            <TouchableOpacity onPress={() => alert(this.props.name)} underlayColor="red">
                 <View style={styles.drinkCardLayout}>
-                    <Image style={styles.drinkImage} source={require('../assets/TempImages/drinkArt.png')}
-                    />
-                    <Text style={styles.subTextFont}>{this.props.title}</Text>
+                    <Image style={styles.drinkImage} source={require('../assets/TempImages/drinkArt.png')} />
+                    <Text style={styles.subTextFont}>{this.props.name}</Text>
                 </View>
             </TouchableOpacity >
         );

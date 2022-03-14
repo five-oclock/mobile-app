@@ -23,18 +23,14 @@ export default StyleSheet.create({
         backgroundColor: '#DCBD7C',
     },
     bodyFile: {
-        flex: .95,
+        flex: 1,
         backgroundColor: 'gray',
-    },
-    scrollView: {
-        backgroundColor: 'pink',
-        marginHorizontal: 20,
     },
     //HeadingStuff
     headerLayout: {
         paddingLeft: 5,
-        paddingTop: 15,
-        backgroundColor: "#B1AEA9"
+        paddingTop: 5,
+        paddingBottom: 5,
 
     },
     titleFont: {
@@ -48,6 +44,38 @@ export default StyleSheet.create({
         justifyContent: "space-around",
         flexWrap: "wrap"
     },
+    //Drink Summary Page
+    detailImageHeader: {
+        height: 130,
+        width: "auto",
+        borderRadius: 40,
+        flexDirection: 'row',
+        justifyContent: "center",
+    },
+
+    drinkImageBox: {
+        backgroundColor: "white",
+        width: "90%",
+        height: "100%",
+        borderRadius: 40,
+        flexDirection: 'row',
+        justifyContent: "center",
+    },
+
+    headerFont: {
+        fontSize: 25,
+        color: "white",
+        left: "5%"
+    },
+
+    ingredientListText: {
+        left: "100%",
+        fontSize: 20,
+        color: "white"
+
+    },
+
+
     //For drinkCard
     drinkImage: {
         width: 130,
@@ -57,10 +85,45 @@ export default StyleSheet.create({
     },
     subTextFont: {
         fontSize: 20,
-        color: "red",
+        color: "white",
     },
     drinkCardLayout: {
         alignItems: 'center',
+    },
+
+
+
+
+    image: {
+        flex: 1,
+        height: "100%",
+        width: '100%'
+    },
+    input: {
+        left: "5%",
+        height: 40,
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
+        width: "80%"
+    },
+    sectionHeader: {
+        paddingTop: 2,
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingBottom: 2,
+        fontSize: 14,
+        fontWeight: 'bold',
+        backgroundColor: 'rgba(247,247,247,1.0)',
+    },
+    listItem: {
+        padding: 10,
+        fontSize: 18,
+        height: 44,
+    },
+    listContainer: {
+        flex: 1,
+        paddingTop: 22
     },
 });
 

@@ -1,41 +1,157 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { Component } from 'react';
-import { Text, View, SafeAreaView, ScrollView, TouchableHighlight } from 'react-native';
-import { PageData } from './Components/pagePopulator'
-import { HeaderTitle } from "./Components/Header"
+import React from 'react';
+import { SectionList, Text, View } from 'react-native';
+
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+
+
+// Other Pages
+import { FrequentPage } from './Components/FrequentPage'
+import DetailPage from './Components/DrinkDetailPage'
+
 import styles from "./Components/Styles/appStyleSheet"
 
 
-
-// Eventually use a map function on the returned array of most recent quries
-// That will populate the page with drink cards
-const cocktailNames = [[0, "Alan"], [2, "Yagga"], [2, "Jerry"], [3, "David"], [4, "Kyle"], [5, "Mao"], [6, "Kelly"], [7, "Joe WHo"]]
-
 export default function App() {
-
-  let importedArr = []
-  for (let i = 0; i < 4; i++) {
-    importedArr.push([cocktailNames[i * 2], cocktailNames[i * 2 + 1]])
-  }
-
-
   return (
-    <View style={styles.baseBackground} >
-      <SafeAreaView style={styles.safeView}>
-        <View style={styles.bodyFile}>
-          <HeaderTitle title="Favorites" />
-          <ScrollView>
-            <PageData />
-          </ScrollView>
-        </View>
-        <View style={styles.tempBottomBar}>
+    <NavigationContainer>
+      <StackScreen />
+    </NavigationContainer>
+  );
+}
 
-        </View>
 
-      </SafeAreaView>
+
+
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+
+function StackScreen() {
+  return (
+    <Stack.Navigator
+      screenOptions={{ headerShown: false }}
+      initialRouteName="Main Pages"
+
+    >
+      <Stack.Screen name="Details" component={DetailPage}
+        options={{ HeaderTitle: 'My 2' }}
+      />
+      <Stack.Screen name="Main Pages" component={MyTabs}
+        options={{ HeaderTitle: 'My home' }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+
+
+function MyTabs() {
+  return (
+    <Tab.Navigator
+      initialRouteName="Recent"
+
+      screenOptions={{
+        tabBarActiveTintColor: '#bd8334',
+        headerStyle: {
+          backgroundColor: "#B1AEA9"
+        }
+      }}
+    >
+      <Tab.Screen
+        name="Frequently Ordered"
+        component={FrequentPage}
+        options={{
+          tabBarLabel: 'Frequent',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name="Catalogue"
+        component={Catalogue}
+        options={{
+          tabBarLabel: 'Catalogue',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="book" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+        }}
+      />
+
+    </Tab.Navigator>
+  );
+}
+
+
+function Catalogue() {
+  return (
+    <View style={styles.listContainer}>
+      <Text style={{ color: "black", fontSize: 25 }}>Find Base/Ingredient</Text>
+      <SectionList
+        sections={[
+          { title: 'A', data: ['Absinthe', 'Aperol', 'Apricot brandy'] },
+          { title: 'B', data: ['Blackberry liqueur'] },
+          { title: 'C', data: ['Cachaca', 'Calvados', 'Campari', 'Champagne', 'Cherry liqueur', 'Coconut milk', 'Coffee liqueur', 'Cognac', 'Cola', 'Cranberry Juice', 'Cream', "Cream liqueur", "Créme liqueur"] },
+          { title: 'D', data: ["Dark rum", "DiSaronno", "DOM Bénédictine", "Drambuie", "Dry White Wine",] },
+          { title: 'E', data: ["Egg yolk"] },
+          { title: 'G', data: ["Galliano", "Gin", "Ginger Ale", "Ginger beer", "Grapefruit juice"] },
+          { title: 'H', data: ["Hot coffee"] },
+          { title: 'K', data: ["Kirsch"] },
+          { title: 'L', data: ["Lemon juice", "Lillet Blonde", "Lime juice"] },
+          { title: 'O', data: ["Olive juice", "Orange Bitters", "Orange juice"] },
+          { title: 'P', data: ["Peach puree", "Peach schnapps", "Pineapple juice", "Pisco", "Prosecco"] },
+          { title: 'R', data: ["Raspberry liqueur", "Red Port"] },
+          { title: 'S', data: ["Soda water", "Syrup"] },
+          { title: 'T', data: ["Tequila", "Tomato juice", "Triple Sec"] },
+          { title: 'V', data: ["Vermouth", "Vodka"] },
+          { title: 'W', data: ['Whiskey'] },
+
+        ]}
+        renderItem={({ item }) => <Text style={styles.listItem}>{item}</Text>}
+        renderSectionHeader={({ section }) => <Text style={styles.sectionHeader}>{section.title}</Text>}
+        keyExtractor={(item, index) => index}
+      />
     </View>
+  );
+}
+
+function Profile() {
+  return (
+    <View style={{ flex: 1, }}>
+      <View style={{ left: "2%", top: "2%", width: "98%" }}>
+        <Text style={{ color: "black", fontSize: 30, }}>Currently Logged in as:</Text>
+        <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+          <Text style={{ color: "black", fontSize: 25, top: "2%" }}>FirstName Last Name</Text>
+          <Text style={{ color: "blue", fontSize: 23, top: "2%", textDecorationLine: 'underline' }}>Log Out</Text>
+        </View>
+        <Text style={{ color: "black", fontSize: 25, top: "20%" }}>Serving Tables:</Text>
+        <Text style={{ color: "black", fontSize: 25, top: "20%", left: "5%" }}>4:</Text>
+        <Text style={{ color: "black", fontSize: 15, top: "20%", left: "10%" }}>Gin Tonic: 7:30</Text>
+        <Text style={{ color: "black", fontSize: 15, top: "20%", left: "10%" }}>Gin Tonic: 8:15</Text>
+        <Text style={{ color: "black", fontSize: 25, top: "20%", left: "5%" }}>5:</Text>
+        <Text style={{ color: "black", fontSize: 15, top: "20%", left: "10%" }}>Cranberry Vodka: 7:43</Text>
+        <Text style={{ color: "black", fontSize: 25, top: "20%", left: "5%" }}>6:</Text>
+        <Text style={{ color: "black", fontSize: 15, top: "20%", left: "10%" }}>House Special 1: 6:30</Text>
+      </View>
 
 
+    </View>
   );
 }
 

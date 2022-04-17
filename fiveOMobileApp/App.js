@@ -1,5 +1,5 @@
 import React from 'react';
-import { SectionList, Text, View } from 'react-native';
+import { SafeAreaView, ImageBackground, SectionList, Text, View } from 'react-native';
 
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -12,6 +12,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // Other Pages
 import { FrequentPage } from './Components/FrequentPage'
 import DetailPage from './Components/DrinkDetailPage'
+import MakePage from './Components/MakingDrinkPage'
 
 import styles from "./Components/Styles/appStyleSheet"
 
@@ -39,6 +40,9 @@ function StackScreen() {
 
     >
       <Stack.Screen name="Details" component={DetailPage}
+        options={{ HeaderTitle: 'My 2' }}
+      />
+      <Stack.Screen name="MakeDrinkPage" component={MakePage}
         options={{ HeaderTitle: 'My 2' }}
       />
       <Stack.Screen name="Main Pages" component={MyTabs}
@@ -102,13 +106,13 @@ function MyTabs() {
 function Catalogue() {
   return (
     <View style={styles.listContainer}>
-      <Text style={{ color: "black", fontSize: 25 }}>Find Base/Ingredient</Text>
+      <Text style={{ color: "black", fontSize: 25, left: 10, paddingBottom: 10 }}>Find Base/Ingredient</Text>
       <SectionList
         sections={[
           { title: 'A', data: ['Absinthe', 'Aperol', 'Apricot brandy'] },
           { title: 'B', data: ['Blackberry liqueur'] },
           { title: 'C', data: ['Cachaca', 'Calvados', 'Campari', 'Champagne', 'Cherry liqueur', 'Coconut milk', 'Coffee liqueur', 'Cognac', 'Cola', 'Cranberry Juice', 'Cream', "Cream liqueur", "Créme liqueur"] },
-          { title: 'D', data: ["Dark rum", "DiSaronno", "DOM Bénédictine", "Drambuie", "Dry White Wine",] },
+          { title: 'D', data: ["DiSaronno", "DOM Bénédictine", "Drambuie", "Dry White Wine",] },
           { title: 'E', data: ["Egg yolk"] },
           { title: 'G', data: ["Galliano", "Gin", "Ginger Ale", "Ginger beer", "Grapefruit juice"] },
           { title: 'H', data: ["Hot coffee"] },
@@ -120,7 +124,7 @@ function Catalogue() {
           { title: 'S', data: ["Soda water", "Syrup"] },
           { title: 'T', data: ["Tequila", "Tomato juice", "Triple Sec"] },
           { title: 'V', data: ["Vermouth", "Vodka"] },
-          { title: 'W', data: ['Whiskey'] },
+          { title: 'W', data: ['Whiskey', "White Rum"] },
 
         ]}
         renderItem={({ item }) => <Text style={styles.listItem}>{item}</Text>}
@@ -137,7 +141,7 @@ function Profile() {
       <View style={{ left: "2%", top: "2%", width: "98%" }}>
         <Text style={{ color: "black", fontSize: 30, }}>Currently Logged in as:</Text>
         <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
-          <Text style={{ color: "black", fontSize: 25, top: "2%" }}>FirstName Last Name</Text>
+          <Text style={{ color: "black", fontSize: 25, top: "2%" }}>Kai H.</Text>
           <Text style={{ color: "blue", fontSize: 23, top: "2%", textDecorationLine: 'underline' }}>Log Out</Text>
         </View>
         <Text style={{ color: "black", fontSize: 25, top: "20%" }}>Serving Tables:</Text>

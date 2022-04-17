@@ -86,6 +86,7 @@ export default StyleSheet.create({
     subTextFont: {
         fontSize: 20,
         color: "white",
+        fontFamily: "Cochin"
     },
     drinkCardLayout: {
         alignItems: 'center',
@@ -123,7 +124,7 @@ export default StyleSheet.create({
     },
     listContainer: {
         flex: 1,
-        paddingTop: 22
+        paddingTop: 5,
     },
 });
 

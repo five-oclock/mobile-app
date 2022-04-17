@@ -1,7 +1,7 @@
 import { TouchableOpacity, Keyboard, TouchableWithoutFeedback, TextInput, Alert, ImageBackground, Button, Image, Text, View, SafeAreaView } from 'react-native';
 import { useState } from "react"
 import styles from "./Styles/appStyleSheet"
-
+import { useNavigation } from "@react-navigation/native"
 
 
 
@@ -19,14 +19,14 @@ const DetailPage = ({ route }) => {
                     <View style={{ alignItems: "center" }}>
                         <View style={styles.detailImageHeader}>
                             <View style={styles.drinkImageBox}>
-                                <Image style={styles.drinkImage} source={require('../assets/TempImages/drinkArt.png')} />
+                                <Image style={styles.drinkImage} source={route.params.drinkImg} />
                             </View>
                         </View>
                         <Text style={styles.subTextFont}>{route.params.drinkName}</Text>
                     </View>
 
                     <Text style={styles.headerFont}>Ingredients:</Text>
-                    <IngredientList />
+                    <IngredientList drinkType={route.params.drinkName} />
                     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                         <View style={{ backgroundColor: "#B1AEA9" }}>
                             <Text style={[styles.headerFont]}>Table:</Text>
@@ -40,14 +40,9 @@ const DetailPage = ({ route }) => {
                         </View>
                     </TouchableWithoutFeedback>
 
+                    <MakeDrinkScreen />
 
-                    <TouchableOpacity style={{ top: 45, alignItems: "center" }}>
-                        <View style={[styles.drinkCardLayout, { backgroundColor: "#1D8EB6", borderRadius: 40, width: "50%" }]}>
-                            <Text style={styles.subTextFont}>Make Drink!</Text>
-                        </View>
-                    </TouchableOpacity >
-                </ImageBackground >
-
+                </ImageBackground>
 
 
             </SafeAreaView >
@@ -56,38 +51,95 @@ const DetailPage = ({ route }) => {
 
 }
 
-var _MargaritaData = [{ "unit": "cl", "amount": 3.5, "ingredient": "Tequila" },
-{ "unit": "cl", "amount": 2, "ingredient": "Triple Sec", "label": "Cointreau" },
-{ "unit": "cl", "amount": 1.5, "ingredient": "Lime juice" }]
-function IngredientList() {
+
+function MakeDrinkScreen() {
+    const navigation = useNavigation();
     return (
-        <View style={{ height: "25%", justifyContent: 'space-evenly' }}>
-            {_MargaritaData.map(function (obj, index) {
-                return (
-                    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                        <Text style={styles.ingredientListText} key={index}>{obj.ingredient}: {obj.amount} ({obj.unit})</Text>
-
-
-
-                        <View style={{ flexDirection: "row", justifyContent: "space-between", width: "20%", right: "10%" }}>
-                            <View style={{ backgroundColor: "white", borderRadius: 500, }}>
-                                <Button
-                                    title="-"
-                                    onPress={() => Alert.alert('Left button pressed')} />
-                            </View>
-
-                            <View style={{ backgroundColor: "white", right: "5%", borderRadius: 500, }}><Button
-                                title="+"
-                                onPress={() => Alert.alert('Right button pressed')} />
-                            </View>
-
-                        </View>
-                    </View>
-                )
-            })}
-        </View>
+        <TouchableOpacity onPress={() => navigation.navigate("MakeDrinkPage")} style={{ top: 45, alignItems: "center" }}>
+            <View style={[styles.drinkCardLayout, { backgroundColor: "#1D8EB6", borderRadius: 40, width: "50%" }]}>
+                <Text style={styles.subTextFont}>Make Drink!</Text>
+            </View>
+        </TouchableOpacity >
 
     );
+}
+var _Cosmo = [{ "unit": "cl", "amount": 4, "ingredient": "Vodka", "label": "Citron Vodka" },
+{ "unit": "cl", "amount": 1.5, "ingredient": "Triple Sec", "label": "Cointreau" },
+{ "unit": "cl", "amount": 1.5, "ingredient": "Lime juice" },
+{ "unit": "cl", "amount": 3, "ingredient": "Cranberry juice" }
+]
+
+var _Negroni = [{ "unit": "cl", "amount": 3, "ingredient": "Gin" },
+{ "unit": "cl", "amount": 3, "ingredient": "Campari" },
+{ "unit": "cl", "amount": 3, "ingredient": "Vermouth", "label": "Sweet red vermouth" }
+]
+function IngredientList(props) {
+    if (props.drinkType == "Negroni") {
+        return (
+            <View style={{ height: "25%", justifyContent: 'space-evenly' }}>
+
+                {
+
+                    _Negroni.map(function (obj, index) {
+                        return (
+                            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                                <Text style={styles.ingredientListText} key={index}>{obj.ingredient}: {obj.amount} ({obj.unit})</Text>
+
+
+
+                                <View style={{ flexDirection: "row", justifyContent: "space-between", width: "20%", right: "10%" }}>
+                                    <View style={{ backgroundColor: "white", borderRadius: 500, }}>
+                                        <Button
+                                            title="-"
+                                            onPress={() => Alert.alert('Left button pressed')} />
+                                    </View>
+
+                                    <View style={{ backgroundColor: "white", right: "5%", borderRadius: 500, }}><Button
+                                        title="+"
+                                        onPress={() => Alert.alert('Right button pressed')} />
+                                    </View>
+
+                                </View>
+                            </View>
+                        )
+                    })}
+            </View>
+
+        );
+    } else {
+        return (
+            <View style={{ height: "25%", justifyContent: 'space-evenly' }}>
+
+                {
+
+                    _Cosmo.map(function (obj, index) {
+                        return (
+                            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                                <Text style={styles.ingredientListText} key={index}>{obj.ingredient}: {obj.amount} ({obj.unit})</Text>
+
+
+
+                                <View style={{ flexDirection: "row", justifyContent: "space-between", width: "20%", right: "10%" }}>
+                                    <View style={{ backgroundColor: "white", borderRadius: 500, }}>
+                                        <Button
+                                            title="-"
+                                            onPress={() => Alert.alert('Left button pressed')} />
+                                    </View>
+
+                                    <View style={{ backgroundColor: "white", right: "5%", borderRadius: 500, }}><Button
+                                        title="+"
+                                        onPress={() => Alert.alert('Right button pressed')} />
+                                    </View>
+
+                                </View>
+                            </View>
+                        )
+                    })}
+            </View>
+
+        );
+    }
+
 }
 
 

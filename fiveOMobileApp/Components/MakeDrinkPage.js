@@ -1,62 +1,34 @@
-import { TouchableOpacity, Keyboard, TouchableWithoutFeedback, TextInput, Alert, ImageBackground, Button, Image, Text, View, SafeAreaView } from 'react-native';
-import { useState } from "react"
+import { ImageBackground, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./Styles/appStyleSheet"
-import { useNavigation } from "@react-navigation/native"
 
 
 
-
-const DetailPage = ({ route }) => {
-    const [number, onChangeNumber] = useState(null);
+const MakePage = () => {
     return (
-        <View style={styles.baseBackground} >
+        <View style={styles.baseBackground}>
             <SafeAreaView style={styles.safeView}>
                 <ImageBackground source={require('../assets/TempImages/barBackground.png')} resizeMode="cover" style={styles.image}>
                     <View style={styles.headerLayout}>
-                        <Text style={styles.headerFont}>Cocktail Summary</Text>
+                        <Text style={styles.headerFont}>Make Cocktail</Text>
                     </View>
-                    <View style={{ alignItems: "center" }}>
-                        <View style={styles.detailImageHeader}>
-                            <View style={styles.drinkImageBox}>
-                                <Image style={styles.drinkImage} source={route.params.drinkImg} />
-                            </View>
-                        </View>
-                        <Text style={styles.subTextFont}>{route.params.drinkName}</Text>
-                    </View>
-
-                    <Text style={styles.headerFont}>Ingredients:</Text>
-                    <IngredientList drinkType={route.params.drinkName} />
-                    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-                        <View style={{ backgroundColor: "#B1AEA9" }}>
-                            <Text style={[styles.headerFont]}>Table:</Text>
-                            <TextInput
-                                style={styles.input}
-                                onChangeText={onChangeNumber}
-                                value={number}
-                                placeholder="4"
-                                keyboardType="numeric"
-                            />
-                        </View>
-                    </TouchableWithoutFeedback>
-
-                    <MakeDrinkScreen />
-
+                    <AddIngredient />
                 </ImageBackground>
+            </SafeAreaView>
+        </View>
 
 
-            </SafeAreaView >
-        </View >
+
+
+
     );
-
 }
 
-
-function MakeDrinkScreen() {
-    const navigation = useNavigation();
+function AddIngredient() {
     return (
-        <TouchableOpacity onPress={() => navigation.navigate("MakeDrinkPage")} style={{ top: 45, alignItems: "center" }}>
+        <TouchableOpacity /**onPress={() => navigation.navigate("MakeDrinkPage")}**/ style={{ top: 45, alignItems: "center" }}>
             <View style={[styles.drinkCardLayout, { backgroundColor: "#1D8EB6", borderRadius: 40, width: "50%" }]}>
-                <Text style={styles.subTextFont}>Make Drink!</Text>
+                <Text style={styles.subTextFont}>Add an Ingredient</Text>
             </View>
         </TouchableOpacity >
 
@@ -115,6 +87,3 @@ function IngredientList(props) {
 
     );
 }
-
-
-export default DetailPage;

@@ -67,22 +67,11 @@ function StackScreen() {
   else
   {
     return (
-      <Stack.Navigator
-        screenOptions={{ headerShown: false }}
-        initialRouteName="Main Pages" >
-  
-        <Stack.Screen name="Details" component={DetailPage}
-          options={{ HeaderTitle: 'My 2' }}
-        />
-        <Stack.Screen name="MakeDrinkPage" component={MakePage}
-          options={{ HeaderTitle: 'My 2' }}
-        />
-        <Stack.Screen name="Main Pages" component={MyTabs}
-          options={{ HeaderTitle: 'My home' }}
-        />
-      </Stack.Navigator>
+      <MyTabs />
     );
   }
+}
+
 function DrinkStackScreen() {
   return (
     <DrinkStack.Navigator

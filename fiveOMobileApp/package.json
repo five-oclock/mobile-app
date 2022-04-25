@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@react-native-masked-view/masked-view": "^0.2.6",
-    "@react-native-picker/picker": "^2.4.1",
+    "@react-native-picker/picker": "2.2.1",
     "@react-navigation/bottom-tabs": "^6.2.0",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.5.0",
@@ -27,12 +27,12 @@
     "react-native-gesture-handler": "~2.1.0",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",
+    "react-native-select-dropdown": "^1.13.0",
     "react-native-svg": "12.1.1",
     "react-native-web": "0.17.1",
     "styled-components": "^5.3.5",
     "styled-system": "^5.1.5",
-    "yup": "^0.32.11",
-    "react-native-select-dropdown": "^1.13.0"
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

@@ -1,5 +1,20 @@
 import React from 'react';
-import { SafeAreaView, ImageBackground, SectionList, Text, View } from 'react-native';
+import { SafeAreaView, ImageBackground, SectionList, Text, View, Button } from 'react-native';
+
+import { initializeApp } from "firebase/app";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA3izmXrz_q4gpLBIvBmjEZO45bvEzYtI0",
+  authDomain: "five-o-clock-b09b1.firebaseapp.com",
+  projectId: "five-o-clock-b09b1",
+  storageBucket: "five-o-clock-b09b1.appspot.com",
+  messagingSenderId: "943351743166",
+  appId: "1:943351743166:web:ce583337a5bb96166354ef",
+  measurementId: "G-WN6G546Z5Y"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -10,17 +25,23 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
 // Other Pages
+import { UserContextProvider, useUserContext } from './api/user.context';
+import UACNavigator from './Pages/UAC';
 import { FrequentPage } from './Components/FrequentPage'
 import DetailPage from './Components/DrinkDetailPage'
 import MakePage from './Components/MakingDrinkPage'
 
 import styles from "./Components/Styles/appStyleSheet"
+import { signOut } from './api/user';
+
 
 
 export default function App() {
   return (
     <NavigationContainer>
-      <StackScreen />
+      <UserContextProvider>
+        <StackScreen />
+      </UserContextProvider>
     </NavigationContainer>
   );
 }
@@ -33,23 +54,35 @@ const Tab = createBottomTabNavigator();
 
 
 function StackScreen() {
-  return (
-    <Stack.Navigator
-      screenOptions={{ headerShown: false }}
-      initialRouteName="Main Pages"
 
-    >
-      <Stack.Screen name="Details" component={DetailPage}
-        options={{ HeaderTitle: 'My 2' }}
-      />
-      <Stack.Screen name="MakeDrinkPage" component={MakePage}
-        options={{ HeaderTitle: 'My 2' }}
-      />
-      <Stack.Screen name="Main Pages" component={MyTabs}
-        options={{ HeaderTitle: 'My home' }}
-      />
-    </Stack.Navigator>
-  );
+  const { user, isLoading, error } = useUserContext();
+
+  if (!user)
+  {
+    console.log({ user });
+    return (
+      <UACNavigator />
+    )
+  }
+  else
+  {
+    return (
+      <Stack.Navigator
+        screenOptions={{ headerShown: false }}
+        initialRouteName="Main Pages" >
+  
+        <Stack.Screen name="Details" component={DetailPage}
+          options={{ HeaderTitle: 'My 2' }}
+        />
+        <Stack.Screen name="MakeDrinkPage" component={MakePage}
+          options={{ HeaderTitle: 'My 2' }}
+        />
+        <Stack.Screen name="Main Pages" component={MyTabs}
+          options={{ HeaderTitle: 'My home' }}
+        />
+      </Stack.Navigator>
+    );
+  }
 }
 
 
@@ -136,13 +169,16 @@ function Catalogue() {
 }
 
 function Profile() {
+
+  const { user } = useUserContext();
+
   return (
     <View style={{ flex: 1, }}>
       <View style={{ left: "2%", top: "2%", width: "98%" }}>
         <Text style={{ color: "black", fontSize: 30, }}>Currently Logged in as:</Text>
         <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
-          <Text style={{ color: "black", fontSize: 25, top: "2%" }}>Kai H.</Text>
-          <Text style={{ color: "blue", fontSize: 23, top: "2%", textDecorationLine: 'underline' }}>Log Out</Text>
+          <Text style={{ color: "black", fontSize: 25, top: "2%" }}>{ user.email }</Text>
+          <Button title='Log Out' onPress={ signOut } />
         </View>
         <Text style={{ color: "black", fontSize: 25, top: "20%" }}>Serving Tables:</Text>
         <Text style={{ color: "black", fontSize: 25, top: "20%", left: "5%" }}>4:</Text>

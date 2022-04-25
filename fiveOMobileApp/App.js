@@ -1,6 +1,21 @@
 import React from 'react';
 import { SafeAreaView, ImageBackground, SectionList, Text, View } from 'react-native';
 
+import { initializeApp } from "firebase/app";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA3izmXrz_q4gpLBIvBmjEZO45bvEzYtI0",
+  authDomain: "five-o-clock-b09b1.firebaseapp.com",
+  projectId: "five-o-clock-b09b1",
+  storageBucket: "five-o-clock-b09b1.appspot.com",
+  messagingSenderId: "943351743166",
+  appId: "1:943351743166:web:ce583337a5bb96166354ef",
+  measurementId: "G-WN6G546Z5Y"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -15,6 +30,9 @@ import DetailPage from './Components/DrinkDetailPage'
 import MakePage from './Components/MakingDrinkPage'
 
 import styles from "./Components/Styles/appStyleSheet"
+import { WelcomePage } from './Pages/WelcomePage';
+import RegisterPage from './Pages/RegisterPage';
+import LoginPage from './Pages/LoginPage';
 
 
 export default function App() {
@@ -36,9 +54,12 @@ function StackScreen() {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName="Main Pages"
+      initialRouteName="Welcome" >
 
-    >
+      <Stack.Screen name='Welcome' component={WelcomePage} />
+      <Stack.Screen name='Register' component={RegisterPage} />
+      <Stack.Screen name='Login' component={LoginPage} />
+
       <Stack.Screen name="Details" component={DetailPage}
         options={{ HeaderTitle: 'My 2' }}
       />

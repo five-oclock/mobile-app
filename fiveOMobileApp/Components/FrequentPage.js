@@ -3,9 +3,9 @@ import { ImageBackground, View, SafeAreaView } from 'react-native';
 import styles from "./Styles/appStyleSheet"
 import { DrinkCard } from './drinkCard'
 
-var _data = [{ name: "Vesper", imageName: require("../assets/TempImages/ceoMartini.png") }, { name: "Cosmopolitan", imageName: require("../assets/TempImages/cosmo.jpg") }, { name: "Horse's Neck", imageName: require("../assets/TempImages/longIsland.jpg") },
-{ name: "Manhattan", imageName: require("../assets/TempImages/martini.jpg") }, { name: "Negroni", imageName: require("../assets/TempImages/negroni.jpg") }, { name: "Tequila Sunrise", imageName: require("../assets/TempImages/tequilaSunrise.jpg") },
-{ name: "White Russian", imageName: require("../assets/TempImages/whiteRussian.jpg") }, { name: "Aviation", imageName: require("../assets/TempImages/drink1.jpg") }]
+var _data = [{ name: "Lemon Twist", imageName: require("../assets/TempImages/ceoMartini.png") }, { name: "Cosmopolitan", imageName: require("../assets/TempImages/cosmo.jpg") }, { name: "Yellow Bird", imageName: require("../assets/TempImages/longIsland.jpg") },
+{ name: "Between the Sheets", imageName: require("../assets/TempImages/martini.jpg") }, { name: "Sex on the Beach", imageName: require("../assets/TempImages/negroni.jpg") }, { name: "Tequila Sunrise", imageName: require("../assets/TempImages/tequilaSunrise.jpg") },
+{ name: "Dry Martini", imageName: require("../assets/TempImages/whiteRussian.jpg") }, { name: "Whiskey Sour", imageName: require("../assets/TempImages/drink1.jpg") }]
 
 export class FrequentPage extends Component {
 

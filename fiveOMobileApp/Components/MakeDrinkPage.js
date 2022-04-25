@@ -1,53 +1,95 @@
-import { ImageBackground, View } from "react-native";
+import { ImageBackground, View, Text, TouchableOpacity, Button } from "react-native";
+import { Component, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./Styles/appStyleSheet"
+import { useNavigation } from "@react-navigation/native"
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import { FullCat } from './FullCateloguePage';
+
+const Stack = createNativeStackNavigator();
+
+// FOR STAFF TO CRAFT/CREATE NEW COCKTAIL RECIPIES
+export class MakePage extends Component {
+    state = {
+        selected: false,
+        index: 0,
+        newSelected: [false, false, false, false],
+        listIng: [{
+            "unit": "cl",
+            "amount": 1,
+            "ingredient": "Blank",
+        }, {
+            "unit": "cl",
+            "amount": 1,
+            "ingredient": "Blank",
+        },
+        {
+            "unit": "cl",
+            "amount": 1,
+            "ingredient": "Blank",
+        },
+        {
+            "unit": "cl",
+            "amount": 1,
+            "ingredient": "Blank",
+        }]
+    };
+
+    onSelect = (data, drinkName) => {
+        this.setState(data);
+        this.state.listIng[this.state.index].ingredient = drinkName
+        this.state.index += 1
+
+    };
+
+    onPress = () => {
+        const { navigation } = this.props;
+        navigation.navigate("Full Catelogue List", { onSelect: this.onSelect })
+    };
 
 
+    render() {
+        return (
+            <View style={styles.baseBackground}>
+                <SafeAreaView style={styles.safeView}>
+                    <ImageBackground source={require('../assets/TempImages/barBackground.png')} resizeMode="cover" style={styles.image}>
+                        <View style={styles.headerLayout}>
+                            <Text style={styles.headerFont}>{this.state.selected ? "Selected" : "Not Selected"}</Text>
+                        </View>
 
-const MakePage = () => {
-    return (
-        <View style={styles.baseBackground}>
-            <SafeAreaView style={styles.safeView}>
-                <ImageBackground source={require('../assets/TempImages/barBackground.png')} resizeMode="cover" style={styles.image}>
-                    <View style={styles.headerLayout}>
-                        <Text style={styles.headerFont}>Make Cocktail</Text>
-                    </View>
-                    <AddIngredient />
-                </ImageBackground>
-            </SafeAreaView>
-        </View>
-
-
-
-
-
-    );
-}
-
-function AddIngredient() {
-    return (
-        <TouchableOpacity /**onPress={() => navigation.navigate("MakeDrinkPage")}**/ style={{ top: 45, alignItems: "center" }}>
-            <View style={[styles.drinkCardLayout, { backgroundColor: "#1D8EB6", borderRadius: 40, width: "50%" }]}>
-                <Text style={styles.subTextFont}>Add an Ingredient</Text>
+                        <IngredientList ingredientList={this.state.listIng} ingCount={this.state.index} />
+                        <TouchableOpacity onPress={this.onPress} style={{ top: 45, alignItems: "center" }}>
+                            <View style={[styles.drinkCardLayout, { backgroundColor: "#1D8EB6", borderRadius: 40, width: "50%" }]}>
+                                <Text style={styles.subTextFont}>Add an Ingredient</Text>
+                            </View>
+                        </TouchableOpacity >
+                    </ImageBackground>
+                </SafeAreaView>
             </View>
-        </TouchableOpacity >
+        );
+    }
 
-    );
+
+
+
 }
 
 function IngredientList(props) {
-    const drinkData = require('./../CocktailRecipes/recipes.json');
-    const _drinkIngredients = drinkData.find(drink => drink.name === props.drinkType)
-    var _ingAmount = []
 
-    // state
+    const _drinkIngredients = props.ingredientList
+    const _indexCount = props.ingCount
+    var _ingAmount = []
+    if (!_drinkIngredients.length) {
+        return null;
+    }
 
     return (
         <View style={{ height: "25%", justifyContent: 'space-evenly' }}>
 
             {
 
-                _drinkIngredients.ingredients.map(function (obj, index) {
+                _drinkIngredients.map(function (obj, index) {
 
                     if (obj.unit === undefined) {
                         return
@@ -58,7 +100,8 @@ function IngredientList(props) {
                     const incrementValue = () => setAmount(orgAmount + 1)
                     const decrementValue = () => setAmount(orgAmount - 1)
                     return (
-                        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+
+                        <View pointerEvents="none" style={{ flexDirection: "row", justifyContent: "space-between", backgroundColor: "#1D8EB6" }}>
                             <Text style={styles.ingredientListText} key={index}>{obj.ingredient}: {_ingAmount[index]} ({obj.unit})</Text>
 
 
@@ -82,8 +125,11 @@ function IngredientList(props) {
                             </View>
                         </View>
                     )
-                })}
+                })
+            }
         </View>
 
     );
 }
+
+export default MakePage;

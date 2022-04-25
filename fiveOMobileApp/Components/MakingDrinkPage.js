@@ -1,7 +1,9 @@
 import { SafeAreaView, ImageBackground, Image, View, Text } from 'react-native';
 
+// WAITIING SCREEN FOR WHEN A ORDER IS BEING MADE BY THE MACHINE
+
 import styles from "./Styles/appStyleSheet"
-const MakePage = ({ route }) => {
+const OrderSent = ({ route }) => {
 
     return (
         <View style={styles.baseBackground} >

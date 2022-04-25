@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, ImageBackground, SectionList, Text, View } from 'react-native';
+import { Alert, SafeAreaView, ImageBackground, TouchableOpacity, SectionList, Text, View } from 'react-native';
 
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -12,8 +12,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // Other Pages
 import { FrequentPage } from './Components/FrequentPage'
 import DetailPage from './Components/DrinkDetailPage'
-import MakePage from './Components/MakingDrinkPage'
+// import OrderSent from './Components/MakingDrinkPage'
+import CurrentInv from './Components/CurrentInventory'
 
+import { MakePage } from './Components/MakeDrinkPage';
+import { FullCat } from './Components/FullCateloguePage';
 import styles from "./Components/Styles/appStyleSheet"
 
 
@@ -42,9 +45,6 @@ function StackScreen() {
       <Stack.Screen name="Details" component={DetailPage}
         options={{ HeaderTitle: 'My 2' }}
       />
-      <Stack.Screen name="MakeDrinkPage" component={MakePage}
-        options={{ HeaderTitle: 'My 2' }}
-      />
       <Stack.Screen name="Main Pages" component={MyTabs}
         options={{ HeaderTitle: 'My home' }}
       />
@@ -52,6 +52,24 @@ function StackScreen() {
   );
 }
 
+
+function MakeDrinkStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{ headerShown: false }}
+      initialRouteName="Create Drink"
+    >
+      <Stack.Screen name="Create Drink" component={MakePage}
+        options={{ HeaderTitle: 'My 2' }}
+      />
+      <Stack.Screen name="Full Catelogue List" component={FullCat}
+        options={{ HeaderTitle: 'My 2' }}
+      />
+    </Stack.Navigator>
+
+
+  );
+}
 
 
 function MyTabs() {
@@ -79,9 +97,9 @@ function MyTabs() {
 
       <Tab.Screen
         name="Catalogue"
-        component={Catalogue}
+        component={CurrentInv}
         options={{
-          tabBarLabel: 'Catalogue',
+          tabBarLabel: 'Current Inventory',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="book" color={color} size={size} />
           ),
@@ -98,42 +116,23 @@ function MyTabs() {
         }}
       />
 
+      <Tab.Screen
+        name="TempTab"
+        component={MakeDrinkStack}
+        options={{
+          tabBarLabel: 'Make Page',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+        }}
+      />
+
     </Tab.Navigator>
   );
 }
 
 
-function Catalogue() {
-  return (
-    <View style={styles.listContainer}>
-      <Text style={{ color: "black", fontSize: 25, left: 10, paddingBottom: 10 }}>Find Base/Ingredient</Text>
-      <SectionList
-        sections={[
-          { title: 'A', data: ['Absinthe', 'Aperol', 'Apricot brandy'] },
-          { title: 'B', data: ['Blackberry liqueur'] },
-          { title: 'C', data: ['Cachaca', 'Calvados', 'Campari', 'Champagne', 'Cherry liqueur', 'Coconut milk', 'Coffee liqueur', 'Cognac', 'Cola', 'Cranberry Juice', 'Cream', "Cream liqueur", "Créme liqueur"] },
-          { title: 'D', data: ["DiSaronno", "DOM Bénédictine", "Drambuie", "Dry White Wine",] },
-          { title: 'E', data: ["Egg yolk"] },
-          { title: 'G', data: ["Galliano", "Gin", "Ginger Ale", "Ginger beer", "Grapefruit juice"] },
-          { title: 'H', data: ["Hot coffee"] },
-          { title: 'K', data: ["Kirsch"] },
-          { title: 'L', data: ["Lemon juice", "Lillet Blonde", "Lime juice"] },
-          { title: 'O', data: ["Olive juice", "Orange Bitters", "Orange juice"] },
-          { title: 'P', data: ["Peach puree", "Peach schnapps", "Pineapple juice", "Pisco", "Prosecco"] },
-          { title: 'R', data: ["Raspberry liqueur", "Red Port"] },
-          { title: 'S', data: ["Soda water", "Syrup"] },
-          { title: 'T', data: ["Tequila", "Tomato juice", "Triple Sec"] },
-          { title: 'V', data: ["Vermouth", "Vodka"] },
-          { title: 'W', data: ['Whiskey', "White Rum"] },
 
-        ]}
-        renderItem={({ item }) => <Text style={styles.listItem}>{item}</Text>}
-        renderSectionHeader={({ section }) => <Text style={styles.sectionHeader}>{section.title}</Text>}
-        keyExtractor={(item, index) => index}
-      />
-    </View>
-  );
-}
 
 function Profile() {
   return (

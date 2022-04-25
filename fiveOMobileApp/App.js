@@ -117,12 +117,12 @@ function MyTabs() {
       />
 
       <Tab.Screen
-        name="TempTab"
+        name="Make Cocktail Tab"
         component={MakeDrinkStack}
         options={{
-          tabBarLabel: 'Make Page',
+          tabBarLabel: 'Make Cocktail',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
+            <MaterialCommunityIcons name="lead-pencil" color={color} size={size} />
           ),
         }}
       />

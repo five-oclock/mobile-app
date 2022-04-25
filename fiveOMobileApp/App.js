@@ -48,7 +48,8 @@ export default function App() {
 }
 
 
-const Stack = createNativeStackNavigator();
+const DrinkStack = createNativeStackNavigator();
+const InventoryStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
  
 
@@ -82,6 +83,46 @@ function StackScreen() {
       </Stack.Navigator>
     );
   }
+function DrinkStackScreen() {
+  return (
+    <DrinkStack.Navigator
+      initialRouteName="Main Pages"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "#B1AEA9"
+        }
+      }} >
+      <DrinkStack.Screen
+        name='Frequently Ordered' component={ FrequentPage } options={{ headerTitle: "Frequently Ordered" }} />
+
+      <DrinkStack.Screen 
+        name="Details" component={DetailPage} options={{ HeaderTitle: 'My 2' }} />
+
+      <DrinkStack.Screen 
+        name="MakeDrinkPage" component={MakePage} options={{ HeaderTitle: 'My 2' }} />
+
+    </DrinkStack.Navigator>
+  );
+}
+
+const InventoryStackScreen = () => {
+  return (
+    <InventoryStack.Navigator
+      initialRouteName='Inventory'
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "#B1AEA9"
+        }
+      }} >
+
+      <InventoryStack.Screen
+        name='Inventory' component={ InventoryPage } options={{ headerTitle: 'Inventory' }} />
+
+      <InventoryStack.Screen
+        name='ResDetailsPage' component={ ResDetailsPage } options={{ headerTitle: 'Details' }} />
+
+    </InventoryStack.Navigator>
+  )
 }
 
 
@@ -90,24 +131,20 @@ function MyTabs() {
   return (
     <Tab.Navigator
       initialRouteName="Recent"
-
       screenOptions={{
         tabBarActiveTintColor: '#bd8334',
-        headerStyle: {
-          backgroundColor: "#B1AEA9"
-        }
+        headerShown: false
       }}
     >
       <Tab.Screen
-        name="Frequently Ordered"
-        component={FrequentPage}
+        name='DrinkStack'
+        component={ DrinkStackScreen }
         options={{
           tabBarLabel: 'Frequent',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
-        }}
-      />
+        }} />
 
       <Tab.Screen
         name="Catalogue"
@@ -119,16 +156,17 @@ function MyTabs() {
           ),
         }}
       />
-       <Tab.Screen
-        name="Inventory"
-        component={InventoryPage}
+
+      <Tab.Screen
+        name='InventoryStack'
+        component={ InventoryStackScreen }
         options={{
           tabBarLabel: 'Inventory',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="pen" color={color} size={size} />
           ),
-        }}
-      />
+        }} />
+
       <Tab.Screen
         name="Profile"
         component={Profile}

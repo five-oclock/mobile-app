@@ -28,9 +28,11 @@
     },
     {
         "name":"Get Drink Status",
-        "endpoint": "/api/v1/location/<LOCATION_NUMBER>",
+        "endpoint": "/api/v1/location",
         "method": "GET",
-        "model": null,
+        "model": {
+			"Location Number": <LOCATION_NUMBER>
+		},
         "response": {
             "200": {
                 "status": "open | making | done",
@@ -57,9 +59,10 @@
     },
     {
         "name": "Update Inventory",
-        "endpoint": "/api/v1/inventory/<RESERVOIR_NUMBER>",
+        "endpoint": "/api/v1/inventory/update",
         "method": "POST",
         "model": {
+			"reservoir-number": <RESERVOIR NUMBER>,
             "ingredient-id": 1,
             "quantity": 150,
             "units": "oz"

@@ -1,5 +1,5 @@
-import React from 'react';
-import { SafeAreaView, ImageBackground, SectionList, Text, View, Button } from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, ImageBackground, SectionList, Text, View, Button, FlatList, TouchableOpacity } from 'react-native';
 
 import { initializeApp } from "firebase/app";
 
@@ -30,10 +30,11 @@ import UACNavigator from './Pages/UAC';
 import { FrequentPage } from './Components/FrequentPage'
 import DetailPage from './Components/DrinkDetailPage'
 import MakePage from './Components/MakingDrinkPage'
+import InventoryPage from './Components/InventoryPage'
+import ResDetailsPage from './Components/ResDetailsPage';
 
 import styles from "./Components/Styles/appStyleSheet"
 import { signOut } from './api/user';
-
 
 
 export default function App() {
@@ -47,11 +48,9 @@ export default function App() {
 }
 
 
-
-
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-
+ 
 
 function StackScreen() {
 
@@ -117,6 +116,16 @@ function MyTabs() {
           tabBarLabel: 'Catalogue',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="book" color={color} size={size} />
+          ),
+        }}
+      />
+       <Tab.Screen
+        name="Inventory"
+        component={InventoryPage}
+        options={{
+          tabBarLabel: 'Inventory',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="pen" color={color} size={size} />
           ),
         }}
       />
@@ -194,5 +203,3 @@ function Profile() {
     </View>
   );
 }
-
-

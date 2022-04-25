@@ -1,10 +1,9 @@
-import { StyleSheet } from "react-native"
+import { StyleSheet, StatusBar } from "react-native"
 // Orange: BD8334
 // Blue: 1D8EB6
 // Light Gray: B1AEA9
 // Dark Gray: 746D65
 // Gold: DCBD7C
-
 
 
 export default StyleSheet.create({
@@ -26,6 +25,20 @@ export default StyleSheet.create({
         flex: 1,
         backgroundColor: 'gray',
     },
+    // Inventory stuff
+    container: {
+        flex: 1,
+        marginTop: StatusBar.currentHeight || 0,
+      },
+      item: {
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16,
+      },
+      title: {
+        fontSize: 32,
+      },
+
     //HeadingStuff
     headerLayout: {
         paddingLeft: 5,
@@ -126,6 +139,46 @@ export default StyleSheet.create({
         flex: 1,
         paddingTop: 5,
     },
+
+    //Drop down Boxes
+    shadow: {
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 6},
+        shadowOpacity: 0.1,
+        shadowRadius: 10,
+        elevation: 10,
+      },
+      header: {
+        flexDirection: 'row',
+        width: '100%',
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#F6F6F6',
+      },
+      headerTitle: {color: '#000', fontWeight: 'bold', fontSize: 16},
+      saveAreaViewContainer: {flex: 0, backgroundColor: '#FFF'},
+      viewContainer: {flex: 0, width: '100%', backgroundColor: '#FFF'},
+      scrollViewContainer: {
+        flexGrow: 1,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingVertical: '10%',
+        paddingBottom: '20%',
+      },
+    
+      dropdown1BtnStyle: {
+        width: '100%',
+        height: 50,
+        backgroundColor: '#FFF',
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: '#444',
+      },
+      dropdown1BtnTxtStyle: {color: '#444', textAlign: 'left'},
+      dropdown1DropdownStyle: {backgroundColor: '#EFEFEF'},
+      dropdown1RowStyle: {backgroundColor: '#EFEFEF', borderBottomColor: '#C5C5C5'},
+      dropdown1RowTxtStyle: {color: '#444', textAlign: 'left'},
 });
 
 

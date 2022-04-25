@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 
 import { View } from 'react-native';
 
-import { ErrorMessage } from '../Components/ErrorMessage'
-import EmailAndPasswordForm from '../Components/EmailAndPasswordForm'
+import { ErrorMessage } from '../../Components/ErrorMessage'
+import EmailAndPasswordForm from '../../Components/EmailAndPasswordForm'
 
-import { signUp as signUpFirebase } from '../api/user'
+import { signUp as signUpFirebase } from '../../api/user'
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const useSignUp = () => {
@@ -46,16 +46,6 @@ const RegisterPage = () => {
                 </View>
             </View>
         </SafeAreaView>
-    // <Center flex={1}>
-    //   <VStack space={4} alignItems="center" w="90%">
-    //     <ErrorMessage error={error} />
-    //     <EmailAndPasswordForm
-    //       onSubmit={signUp}
-    //       isLoading={isLoading}
-    //       withPasswordConfirmation={true}
-    //     />
-    //   </VStack>
-    // </Center>
   )
 }
 

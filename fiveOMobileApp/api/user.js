@@ -1,7 +1,7 @@
 // Stolen from https://github.com/diegocasmo/expo-firebase-authentication/blob/main/src/api/user.js
 
 // import firebase from '../firebase'
-import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword } from 'firebase/auth'
 
 export const getUser = () => getAuth().currentUser
 
@@ -16,7 +16,7 @@ export const signUp = async ({ email = '', password = '' }) => {
 }
 
 export const signIn = ({ email = '', password = '' }) =>
-  getAuth().signInWithEmailAndPassword(email, password)
+  signInWithEmailAndPassword(getAuth(), email, password)
 
 export const sendVerification = (user) => sendEmailVerification(user)
 

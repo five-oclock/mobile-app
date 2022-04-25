@@ -15,16 +15,6 @@ export const WelcomePage = ({ navigation }) => {
   }
 
   return (
-    // <Center flex={1}>
-    //   <VStack space={4} alignItems="center" w="90%">
-    //     <Center>
-    //       <Button onPress={handlePressOnSignIn}>Sign in</Button>
-    //     </Center>
-    //     <Center>
-    //       <Button onPress={handlePressOnSignUp}>Create account</Button>
-    //     </Center>
-    //   </VStack>
-    // </Center>
     <SafeAreaView>
       <View>
         <View>

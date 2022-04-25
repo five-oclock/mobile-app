@@ -44,8 +44,38 @@ export class MakePage extends Component {
     };
 
     onPress = () => {
+        if (this.state.index < 4) {
+            const { navigation } = this.props;
+            navigation.navigate("Full Catelogue List", { onSelect: this.onSelect })
+        }
+
+    };
+
+    onPressDone = () => {
+        this.state.index = 0
+        this.state.listIng = [{
+            "unit": "cl",
+            "amount": 1,
+            "ingredient": "Blank",
+        }, {
+            "unit": "cl",
+            "amount": 1,
+            "ingredient": "Blank",
+        },
+        {
+            "unit": "cl",
+            "amount": 1,
+            "ingredient": "Blank",
+        },
+        {
+            "unit": "cl",
+            "amount": 1,
+            "ingredient": "Blank",
+        }]
+        alert("Saved The Drink!")
+
         const { navigation } = this.props;
-        navigation.navigate("Full Catelogue List", { onSelect: this.onSelect })
+        navigation.goBack()
     };
 
 
@@ -58,10 +88,16 @@ export class MakePage extends Component {
                             <Text style={styles.headerFont}>{this.state.selected ? "Selected" : "Not Selected"}</Text>
                         </View>
 
-                        <IngredientList ingredientList={this.state.listIng} ingCount={this.state.index} />
+                        <IngredientList ingredientList={this.state.listIng} count={this.state.index} />
                         <TouchableOpacity onPress={this.onPress} style={{ top: 45, alignItems: "center" }}>
-                            <View style={[styles.drinkCardLayout, { backgroundColor: "#1D8EB6", borderRadius: 40, width: "50%" }]}>
+                            <View style={[styles.drinkCardLayout, { backgroundColor: "#1D8EB6", borderRadius: 40, width: "50%", marginTop: "20%" }]}>
                                 <Text style={styles.subTextFont}>Add an Ingredient</Text>
+                            </View>
+                        </TouchableOpacity >
+
+                        <TouchableOpacity onPress={this.onPressDone} style={{ top: 45, alignItems: "center" }}>
+                            <View style={[styles.drinkCardLayout, { backgroundColor: "#1D8EB6", borderRadius: 40, width: "50%", marginTop: "35%" }]}>
+                                <Text style={styles.subTextFont}>Finish Cocktail</Text>
                             </View>
                         </TouchableOpacity >
                     </ImageBackground>
@@ -78,7 +114,6 @@ export class MakePage extends Component {
 function IngredientList(props) {
 
     const _drinkIngredients = props.ingredientList
-    const _indexCount = props.ingCount
     var _ingAmount = []
     if (!_drinkIngredients.length) {
         return null;
@@ -100,8 +135,7 @@ function IngredientList(props) {
                     const incrementValue = () => setAmount(orgAmount + 1)
                     const decrementValue = () => setAmount(orgAmount - 1)
                     return (
-
-                        <View pointerEvents="none" style={{ flexDirection: "row", justifyContent: "space-between", backgroundColor: "#1D8EB6" }}>
+                        <View style={{ flexDirection: "row", justifyContent: "space-between", backgroundColor: "#1D8EB6", marginTop: "20%", borderRadius: 40, }}>
                             <Text style={styles.ingredientListText} key={index}>{obj.ingredient}: {_ingAmount[index]} ({obj.unit})</Text>
 
 
@@ -125,8 +159,7 @@ function IngredientList(props) {
                             </View>
                         </View>
                     )
-                })
-            }
+                })}
         </View>
 
     );

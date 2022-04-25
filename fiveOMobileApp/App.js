@@ -1,5 +1,5 @@
-import React from 'react';
-import { SafeAreaView, ImageBackground, SectionList, Text, View, Button } from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, ImageBackground, SectionList, Text, View, Button, FlatList, TouchableOpacity } from 'react-native';
 
 import { initializeApp } from "firebase/app";
 
@@ -30,10 +30,11 @@ import UACNavigator from './Pages/UAC';
 import { FrequentPage } from './Components/FrequentPage'
 import DetailPage from './Components/DrinkDetailPage'
 import MakePage from './Components/MakingDrinkPage'
+import InventoryPage from './Components/InventoryPage'
+import ResDetailsPage from './Components/ResDetailsPage';
 
 import styles from "./Components/Styles/appStyleSheet"
 import { signOut } from './api/user';
-
 
 
 export default function App() {
@@ -47,11 +48,10 @@ export default function App() {
 }
 
 
-
-
-const Stack = createNativeStackNavigator();
+const DrinkStack = createNativeStackNavigator();
+const InventoryStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-
+ 
 
 function StackScreen() {
 
@@ -67,22 +67,51 @@ function StackScreen() {
   else
   {
     return (
-      <Stack.Navigator
-        screenOptions={{ headerShown: false }}
-        initialRouteName="Main Pages" >
-  
-        <Stack.Screen name="Details" component={DetailPage}
-          options={{ HeaderTitle: 'My 2' }}
-        />
-        <Stack.Screen name="MakeDrinkPage" component={MakePage}
-          options={{ HeaderTitle: 'My 2' }}
-        />
-        <Stack.Screen name="Main Pages" component={MyTabs}
-          options={{ HeaderTitle: 'My home' }}
-        />
-      </Stack.Navigator>
+      <MyTabs />
     );
   }
+}
+
+function DrinkStackScreen() {
+  return (
+    <DrinkStack.Navigator
+      initialRouteName="Main Pages"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "#B1AEA9"
+        }
+      }} >
+      <DrinkStack.Screen
+        name='Frequently Ordered' component={ FrequentPage } options={{ headerTitle: "Frequently Ordered" }} />
+
+      <DrinkStack.Screen 
+        name="Details" component={DetailPage} options={{ HeaderTitle: 'My 2' }} />
+
+      <DrinkStack.Screen 
+        name="MakeDrinkPage" component={MakePage} options={{ HeaderTitle: 'My 2' }} />
+
+    </DrinkStack.Navigator>
+  );
+}
+
+const InventoryStackScreen = () => {
+  return (
+    <InventoryStack.Navigator
+      initialRouteName='Inventory'
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "#B1AEA9"
+        }
+      }} >
+
+      <InventoryStack.Screen
+        name='Inventory' component={ InventoryPage } options={{ headerTitle: 'Inventory' }} />
+
+      <InventoryStack.Screen
+        name='ResDetailsPage' component={ ResDetailsPage } options={{ headerTitle: 'Details' }} />
+
+    </InventoryStack.Navigator>
+  )
 }
 
 
@@ -91,24 +120,20 @@ function MyTabs() {
   return (
     <Tab.Navigator
       initialRouteName="Recent"
-
       screenOptions={{
         tabBarActiveTintColor: '#bd8334',
-        headerStyle: {
-          backgroundColor: "#B1AEA9"
-        }
+        headerShown: false
       }}
     >
       <Tab.Screen
-        name="Frequently Ordered"
-        component={FrequentPage}
+        name='DrinkStack'
+        component={ DrinkStackScreen }
         options={{
           tabBarLabel: 'Frequent',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
-        }}
-      />
+        }} />
 
       <Tab.Screen
         name="Catalogue"
@@ -120,6 +145,17 @@ function MyTabs() {
           ),
         }}
       />
+
+      <Tab.Screen
+        name='InventoryStack'
+        component={ InventoryStackScreen }
+        options={{
+          tabBarLabel: 'Inventory',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="pen" color={color} size={size} />
+          ),
+        }} />
+
       <Tab.Screen
         name="Profile"
         component={Profile}
@@ -194,5 +230,3 @@ function Profile() {
     </View>
   );
 }
-
-

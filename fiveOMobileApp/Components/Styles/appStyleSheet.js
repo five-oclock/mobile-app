@@ -179,6 +179,18 @@ export default StyleSheet.create({
       dropdown1DropdownStyle: {backgroundColor: '#EFEFEF'},
       dropdown1RowStyle: {backgroundColor: '#EFEFEF', borderBottomColor: '#C5C5C5'},
       dropdown1RowTxtStyle: {color: '#444', textAlign: 'left'},
+    //Login Page
+    container: {
+        paddingTop: 50,
+      },
+      tinyLogo: {
+        width: 50,
+        height: 50,
+      },
+      logo: {
+        width: 66,
+        height: 58,
+      },
 });
 
 
